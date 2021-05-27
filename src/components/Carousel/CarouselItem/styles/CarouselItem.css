@@ -1,0 +1,53 @@
+.item {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  -webkit-transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
+  transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
+}
+
+.level-2 {
+  height: 150px;
+  width: 110px;
+  line-height: 150px;
+  background-color: #228291;
+  left: 650px;
+  margin-top: 25px;
+}
+
+.level-1 {
+  height: 180px;
+  width: 130px;
+  line-height: 180px;
+  background-color: #6796e5;
+  left: 500px;
+  margin-top: 10px;
+}
+
+.level0 {
+  height: 200px;
+  width: 150px;
+  line-height: 200px;
+  background-color: #4ec9e1;
+  left: 330px;
+}
+
+.level1 {
+  height: 180px;
+  width: 130px;
+  line-height: 180px;
+  background-color: #6796e5;
+  margin-top: 10px;
+  left: 180px;
+}
+
+.level2 {
+  height: 150px;
+  width: 110px;
+  line-height: 150px;
+  background-color: #228291;
+  margin-top: 25px;
+  left: 50px;
+}
+/*# sourceMappingURL=CarouselItem.css.map */
