@@ -1,0 +1,65 @@
+.item {
+  text-align: center;
+  color: white;
+  font-size: 40px;
+  position: absolute;
+  transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s,
+    background-color 1s;
+}
+
+$level2-height: 150px;
+$level2-width: 110px;
+$level1-height: 180px;
+$level1-width: 130px;
+$level0-height: 200px;
+$level0-width: 150px;
+
+$level-2-left: 650px;
+$level-1-left: 500px;
+$level0-left: 330px;
+$level1-left: 180px;
+$level2-left: 50px;
+
+.level-2 {
+  height: $level2-height;
+  width: $level2-width;
+  line-height: $level2-height;
+  background-color: #228291;
+  left: $level-2-left;
+  margin-top: 25px;
+}
+
+.level-1 {
+  height: $level1-height;
+  width: $level1-width;
+  line-height: $level1-height;
+  background-color: #6796e5;
+  left: $level-1-left;
+  margin-top: 10px;
+}
+
+.level0 {
+  height: $level0-height;
+  width: $level0-width;
+  line-height: $level0-height;
+  background-color: #4ec9e1;
+  left: $level0-left;
+}
+
+.level1 {
+  height: $level1-height;
+  width: $level1-width;
+  line-height: $level1-height;
+  background-color: #6796e5;
+  margin-top: 10px;
+  left: $level1-left;
+}
+
+.level2 {
+  height: $level2-height;
+  width: $level2-width;
+  line-height: $level2-height;
+  background-color: #228291;
+  margin-top: 25px;
+  left: $level2-left;
+}
