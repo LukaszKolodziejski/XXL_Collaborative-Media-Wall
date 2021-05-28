@@ -1,0 +1,28 @@
+// $level2-height: 150px;
+// $level2-width: 110px;
+// $level1-height: 180px;
+// $level1-width: 130px;
+// $level0-height: 200px;
+// $level0-width: 150px;
+
+// $level-2-left: 650px;
+// $level-1-left: 500px;
+// $level0-left: 330px;
+// $level1-left: 180px;
+// $level2-left: 50px;
+
+$X: 1.7;
+$W: 2;
+
+$level2-height: 150px * $X;
+$level2-width: 110px * $X * $W;
+$level1-height: 180px * $X;
+$level1-width: 130px * $X * $W;
+$level0-height: 200px * $X;
+$level0-width: 150px * $X * $W;
+
+$level-2-left: 650px * $X;
+$level-1-left: 500px * $X;
+$level0-left: 330px * $X;
+$level1-left: 180px * $X;
+$level2-left: 50px * $X;
