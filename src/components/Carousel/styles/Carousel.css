@@ -1,12 +1,19 @@
 #carousel {
-  position: absolute;
-  height: 200px;
-  width: 810px;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  display: block;
+  position: relative;
+  height: 100%;
+  width: 100vw;
+  padding: 120px 0 0 0;
+  text-align: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  overflow: hidden;
 }
 
 .arrow {
@@ -21,82 +28,33 @@
   font-size: 20px;
   color: #228291;
   line-height: 30px;
-  margin-top: 85px;
+  margin-top: 140px;
   z-index: 1000;
 }
 
 .arrow-right {
-  left: 780px;
+  right: 60px;
 }
 
-.item {
-  text-align: center;
-  color: white;
-  font-size: 40px;
-  position: absolute;
-  -webkit-transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
-  transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
-}
-
-.level-2 {
-  height: 150px;
-  width: 110px;
-  line-height: 150px;
-  background-color: #228291;
-  left: 650px;
-  margin-top: 25px;
-}
-
-.level-1 {
-  height: 180px;
-  width: 130px;
-  line-height: 180px;
-  background-color: #6796e5;
-  left: 500px;
-  margin-top: 10px;
-}
-
-.level0 {
-  height: 200px;
-  width: 150px;
-  line-height: 200px;
-  background-color: #4ec9e1;
-  left: 330px;
-}
-
-.level1 {
-  height: 180px;
-  width: 130px;
-  line-height: 180px;
-  background-color: #6796e5;
-  margin-top: 10px;
-  left: 180px;
-}
-
-.level2 {
-  height: 150px;
-  width: 110px;
-  line-height: 150px;
-  background-color: #228291;
-  margin-top: 25px;
-  left: 50px;
+.arrow-left {
+  left: 90px;
 }
 
 .left-enter {
   opacity: 0;
-  left: -60px;
-  height: 120px;
-  width: 90px;
-  line-height: 120px;
+  left: -289px;
+  height: 225px;
+  width: 354px;
+  line-height: 225px;
   margin-top: 40px;
 }
 
 .left-enter.left-enter-active {
   opacity: 1;
-  left: 50px;
-  height: 150px;
-  width: 110px;
-  line-height: 150px;
+  left: 85px;
+  height: 255px;
+  width: 374px;
+  line-height: 255px;
   margin-top: 25px;
   -webkit-transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
   transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
@@ -104,59 +62,59 @@
 
 .left-leave {
   opacity: 1;
-  left: 650px;
-  height: 150px;
-  width: 110px;
-  line-height: 150px;
+  left: 1105px;
+  height: 255px;
+  width: 374px;
+  line-height: 255px;
   margin-top: 25px;
 }
 
 .left-leave.left-leave-active {
-  left: 780px;
+  left: 1499px;
   opacity: 0;
-  height: 120px;
+  height: 225px;
   line-height: 120px;
   margin-top: 40px;
-  width: 90px;
+  width: 354px;
   -webkit-transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
   transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
 }
 
 .right-enter {
   opacity: 0;
-  left: 760px;
-  height: 120px;
-  width: 90px;
-  line-height: 120px;
+  left: 1479px;
+  height: 225px;
+  width: 354px;
+  line-height: 225px;
   margin-top: 40px;
 }
 
 .right-enter.right-enter-active {
-  left: 650px;
+  left: 1105px;
   opacity: 1;
-  height: 150px;
+  height: 255px;
   margin-top: 25px;
-  line-height: 150px;
-  width: 110px;
+  line-height: 255px;
+  width: 374px;
   -webkit-transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
   transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
 }
 
 .right-leave {
-  left: 50px;
-  height: 150px;
+  left: 85px;
+  height: 255px;
   opacity: 1;
   margin-top: 25px;
-  line-height: 150px;
-  width: 110px;
+  line-height: 255px;
+  width: 374px;
 }
 
 .right-leave.right-leave-active {
-  left: -60px;
+  left: -289px;
   opacity: 0;
-  height: 120px;
-  width: 90px;
-  line-height: 120px;
+  height: 225px;
+  width: 354px;
+  line-height: 225px;
   margin-top: 40px;
   -webkit-transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
   transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;

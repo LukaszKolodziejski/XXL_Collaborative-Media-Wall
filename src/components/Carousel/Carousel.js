@@ -20,7 +20,12 @@ const Carousel = (props) => {
       }
       level = props.active - i;
       items.push(
-        <CarouselItem key={index} id={props.items[index]} level={level} />
+        <CarouselItem
+          key={index}
+          id={props.items[index]}
+          image={props.items[index]}
+          level={level}
+        />
       );
     }
     return items;
