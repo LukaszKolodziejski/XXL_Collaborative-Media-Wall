@@ -4,6 +4,7 @@ import styles from "./Navigation.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
 const Navigation = (props) => {
+  const users = ["Łukasz", "Elsie", "Willie", "Sheri"];
   return (
     <header className={styles.Navigation}>
       <nav className={styles.DeskopOnly}>
@@ -11,12 +12,13 @@ const Navigation = (props) => {
           <NavigationItem link="/shared" exact>
             SHARED
           </NavigationItem>
-          <NavigationItem link="/user1">
-            {"My folder ( Łukasz )"}
-          </NavigationItem>
-          <NavigationItem link="/user2">{"Folder ( Elsie )"}</NavigationItem>
-          <NavigationItem link="/user3">{"Folder ( Willie )"}</NavigationItem>
-          <NavigationItem link="/user4">{"Folder ( Sheri )"}</NavigationItem>
+          {users.map((user) => {
+            return (
+              <NavigationItem key={user} link={`/user-${user}`}>
+                {`${user === users[0] ? "My folder" : "Folder"} ( ${user} )`}
+              </NavigationItem>
+            );
+          })}
         </ul>
         {/* <NavigationItems isAuth={props.isAuth} /> */}
       </nav>
