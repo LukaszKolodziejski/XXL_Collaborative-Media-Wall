@@ -1,0 +1,12 @@
+.Modal {
+  position: fixed;
+  z-index: 500;
+  width: 70%;
+  left: 6%;
+  top: 12%;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+/*# sourceMappingURL=Modal.module.css.map */
