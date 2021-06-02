@@ -6,6 +6,8 @@ import SharedData from "./containers/SharedData/SharedData";
 // import Logout from "./containers/Auth/Logout/Logout";
 
 const App = () => {
+  const users = ["Łukasz", "Elsie", "Willie", "Sheri"];
+
   return (
     <Router>
       <Layout>
