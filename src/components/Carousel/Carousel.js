@@ -8,9 +8,9 @@ const Carousel = (props) => {
   const [direction, setDirection] = useState("");
 
   const generateItems = () => {
+    console.log(props.items);
     const items = [];
     let level;
-    console.log(props.active);
     for (let i = props.active - 2; i < props.active + 3; i++) {
       let index = i;
       if (i < 0) {
@@ -20,12 +20,7 @@ const Carousel = (props) => {
       }
       level = props.active - i;
       items.push(
-        <CarouselItem
-          key={index}
-          id={props.items[index]}
-          image={props.items[index]}
-          level={level}
-        />
+        <CarouselItem key={index} level={level} metadata={props.items[index]} />
       );
     }
     return items;

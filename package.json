@@ -7,7 +7,16 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "dist-exiftool": "^10.53.0",
+    "exif": "^0.6.0",
+    "exif-js": "^2.3.0",
+    "exiftool": "0.0.3",
+    "express": "^4.16.4",
     "gsap": "^3.6.1",
+    "image-luminosity": "^0.1.1",
+    "jimp": "^0.16.1",
+    "luminance": "^1.0.3",
+    "node-exiftool": "^2.3.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-addons-css-transition-group": "^15.6.2",
@@ -19,11 +28,19 @@
     "redux-thunk": "^2.3.0",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "api": "node logic/index.js",
+    "dev": "nodemon logic/index.js",
+    "devhist": "node logic/imagehistogramsdemo.js",
+    "hist": "nodemon logic/imagehistogramsdemo.js"
   },
   "eslintConfig": {
     "extends": [
