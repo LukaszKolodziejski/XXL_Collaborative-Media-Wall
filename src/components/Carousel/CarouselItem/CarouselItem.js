@@ -5,7 +5,11 @@ const CarouselItem = (props) => {
   const className = "item level" + props.level;
   return (
     <div className={className}>
-      <img className="image" src={props.image} alt={props.image} />
+      <img
+        className="image"
+        src={props.metadata.imageUrl}
+        alt={props.metadata.tags}
+      />
     </div>
   );
 };
