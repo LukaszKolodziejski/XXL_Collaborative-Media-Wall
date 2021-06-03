@@ -2,33 +2,21 @@ import React, { useState, useEffect } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import styles from "./SharedData.module.css";
 import axios from "../../axios-data";
-import imagesWithMetadata from "../../metadata.json";
 import KeyboardEventHandler from "react-keyboard-event-handler";
-
-// const importAllimages = (r) => r.keys().map((item) => r(item).default);
-const importAllimages = (r) =>
-  r.keys().map((item) => {
-    const imageUrl = r(item).default;
-    const image = imagesWithMetadata.find((imgMeta) =>
-      imageUrl.includes(imgMeta.id)
-    );
-    return { ...image, imageUrl };
-  });
-
-const images = importAllimages(
-  require.context("../../assets/images", false, /\.(png|jpg|svg)$/)
-);
 
 const SharedData = (props) => {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState("");
+
+  const { images } = props;
+  const filteredImages = images.filter((img) => img.user === props.user);
 
   // useEffect(() => {
   //   axios.put("marathon-2366475").then((res) => {
   //     console.log(res.data);
   //   });
   // }, []);
-  console.log(imagesWithMetadata);
+  // console.log(imagesWithMetadata);
 
   const moveHandler = (key) => {
     if (key === "left") {
@@ -48,8 +36,9 @@ const SharedData = (props) => {
       />
       <div className={styles.SharedData}>
         <Carousel
-          items={images}
+          items={filteredImages}
           active={active}
+          users={props.users}
           direction={direction}
           onSetActive={moveHandler}
         />
