@@ -7,10 +7,12 @@ import HistY from "../../assets/histograms/HistY.svg";
 import HistCb from "../../assets/histograms/HistCb.svg";
 import HistCr from "../../assets/histograms/HistCr.svg";
 import Histogram from "../Histogram/Histogram";
+import MetadataDetails from "./MetadataDetails/MetadataDetails";
 
 const Metadata = (props) => {
   if (!props.show) return null;
   console.log(props.metadata);
+  const { users, metadata } = props;
   return (
     <div className={styles.Metadata}>
       <Histogram name="R" svg={HistRed} style={styles.e1} />
@@ -19,7 +21,7 @@ const Metadata = (props) => {
       <Histogram name="Y" svg={HistY} style={styles.e4} />
       <Histogram name="Cb" svg={HistCb} style={styles.e5} />
       <Histogram name="Cr" svg={HistCr} style={styles.e6} />
-      <div className={styles.e7}>Koza</div>
+      <MetadataDetails style={styles.e7} metadata={metadata} users={users} />
     </div>
   );
 };
