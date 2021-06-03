@@ -1,14 +1,12 @@
 const path = require("path");
-// const PHOTO_PATH = path.join(__dirname, "./images/baseball-1536097.jpg");
-const PHOTO_PATH = path.join(
-  __dirname,
-  "../src/assets/images/marathon-2366475.jpg"
-);
-// const PHOTO_PATH = path.join(__dirname, "./images/bananas-1119790_1920.jpg");
 
 function createHistograms() {
   const Jimp = require("jimp");
   const Hist = require("./imagehistograms.js");
+
+  const url = "../src/assets/images/the-caucasus-5302236.jpg";
+  const image = "the-caucasus-5302236";
+  const PHOTO_PATH = path.join(__dirname, `../src/assets/images/${image}.jpg`);
 
   Jimp.read(PHOTO_PATH, function (err, photo) {
     if (err) {
@@ -21,12 +19,21 @@ function createHistograms() {
       const histCb = Hist.histogramYCbCr(Hist.colorChannels.Cb, photo);
       const histCr = Hist.histogramYCbCr(Hist.colorChannels.Cr, photo);
 
-      saveHistogram(histRed, "../src/assets/histograms/Histred.svg");
-      saveHistogram(histGreen, "../src/assets/histograms/Histgreen.svg");
-      saveHistogram(histBlue, "../src/assets/histograms/Histblue.svg");
-      saveHistogram(histY, "../src/assets/histograms/HistY.svg");
-      saveHistogram(histCb, "../src/assets/histograms/HistCb.svg");
-      saveHistogram(histCr, "../src/assets/histograms/HistCr.svg");
+      saveHistogram(
+        histRed,
+        `../src/assets/histograms/${image}-e1-hist-Red.svg`
+      );
+      saveHistogram(
+        histGreen,
+        `../src/assets/histograms/${image}-e2-hist-Green.svg`
+      );
+      saveHistogram(
+        histBlue,
+        `../src/assets/histograms/${image}-e3-hist-Blue.svg`
+      );
+      saveHistogram(histY, `../src/assets/histograms/${image}-e4-hist-Y.svg`);
+      saveHistogram(histCb, `../src/assets/histograms/${image}-e5-hist-Cb.svg`);
+      saveHistogram(histCr, `../src/assets/histograms/${image}-e6-hist-Cr.svg`);
     }
   });
 }
