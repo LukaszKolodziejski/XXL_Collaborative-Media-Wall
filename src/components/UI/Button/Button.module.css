@@ -1,0 +1,9 @@
+.Button {
+  position: fixed;
+  z-index: 2000;
+  top: 30px;
+  right: -50px;
+  background-color: #dee1db;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=Button.module.css.map */

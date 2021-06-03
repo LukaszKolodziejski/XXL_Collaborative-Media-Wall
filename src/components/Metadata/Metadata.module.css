@@ -1,0 +1,68 @@
+.Metadata {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-top: 20px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr;
+      grid-template-areas: "hred hgreen hblue" "hy api api" "hcb api api" "hcr api api";
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  background-color: #e0dddd;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.e1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: hred;
+}
+
+.e2 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: hgreen;
+}
+
+.e3 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: hblue;
+}
+
+.e4 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: hy;
+  padding-top: 3px;
+}
+
+.e5 {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: hcb;
+  padding-top: 3px;
+}
+
+.e6 {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+  grid-area: hcr;
+  padding-top: 3px;
+}
+
+.e7 {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-area: api;
+  padding-top: 6px;
+}
+/*# sourceMappingURL=Metadata.module.css.map */

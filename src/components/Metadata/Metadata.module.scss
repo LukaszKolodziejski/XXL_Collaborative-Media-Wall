@@ -1,0 +1,51 @@
+.Metadata {
+  //   display: block;
+  box-sizing: border-box;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  //   grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-areas:
+    "hred hgreen hblue"
+    "hy api api"
+    "hcb api api"
+    "hcr api api";
+  width: 100%;
+  height: 100%;
+  line-height: 100%;
+  background-color: rgb(224, 221, 221);
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  //   text-align: left;
+  //   background-size: cover;
+}
+
+.e1 {
+  grid-area: hred;
+  //   background-color: rgb(208, 95, 95);
+}
+.e2 {
+  grid-area: hgreen;
+}
+.e3 {
+  grid-area: hblue;
+}
+.e4 {
+  grid-area: hy;
+  padding-top: 3px;
+}
+.e5 {
+  grid-area: hcb;
+  padding-top: 3px;
+}
+.e6 {
+  grid-area: hcr;
+  padding-top: 3px;
+}
+.e7 {
+  grid-area: api;
+  padding-top: 6px;
+  //   background-color: rgb(208, 95, 95);
+}
