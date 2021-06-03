@@ -9,12 +9,12 @@ const Navigation = (props) => {
     <header className={styles.Navigation}>
       <nav className={styles.DeskopOnly}>
         <ul className={styles.NavigationItems}>
-          <NavigationItem link="/shared" exact>
+          <NavigationItem link="/folder-shared" exact>
             SHARED
           </NavigationItem>
           {users.map((user) => {
             return (
-              <NavigationItem key={user} link={`/user-${user}`}>
+              <NavigationItem key={user} link={`/folder-${user}`}>
                 {`${user === users[0] ? "My folder" : "Folder"} ( ${user} )`}
               </NavigationItem>
             );
