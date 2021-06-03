@@ -15,15 +15,36 @@ const Carousel = (props) => {
     const items = [];
     let level;
     const { length } = props.items;
-    for (let i = props.active - 2; i < props.active + 3; i++) {
-      let index = i;
-      index = i < 0 ? length + i : i >= length ? i % length : i;
 
+    let startLoop;
+    let endLoop;
+
+    if (length >= 5) {
+      startLoop = props.active - 2;
+      endLoop = props.active + 3;
+    } else if (length > 2 && length < 5) {
+      console.log("2 5");
+      startLoop = props.active - 1;
+      endLoop = props.active + 2;
+    } else if (length >= 0 && length <= 2) {
+      console.log("0 2");
+      startLoop = props.active;
+      endLoop = props.active + 1;
+    }
+
+    for (let i = startLoop; i < endLoop; i++) {
+      let index = i;
+      if (i < 0) {
+        index = length + i;
+      } else if (i >= length) {
+        index = i % length;
+      }
       level = props.active - i;
       items.push(
         <CarouselItem
           key={index}
           level={level}
+          users={props.users}
           metadata={props.items[index]}
           modalClosed={modalHandler}
           activeMmetadata={activeIdHandler}
@@ -33,10 +54,16 @@ const Carousel = (props) => {
     return items;
   };
 
-  const modalHandler = () => setIsModal((prev) => !prev);
+  const modalHandler = () => {
+    setIsModal((prev) => !prev);
+    setActiveID({});
+    setShowMetadata(false);
+  };
   const activeIdHandler = (id) =>
     setActiveID(props.items.find((item) => item.id === id));
   const btnHandler = () => setShowMetadata((prev) => !prev);
+
+  if (props.items.length === 0) return <div>{"No data :("}</div>;
 
   return (
     <>
@@ -47,10 +74,15 @@ const Carousel = (props) => {
         <CarouselItem
           level={9}
           metadata={activeID}
+          users={props.users}
           activeMmetadata={activeIdHandler}
           modalClosed={modalHandler}
         >
-          <Metadata show={showMetadata} metadata={activeID} />
+          <Metadata
+            show={showMetadata}
+            metadata={activeID}
+            users={props.users}
+          />
         </CarouselItem>
       </Modal>
       <div id="carousel" className="noselect">
