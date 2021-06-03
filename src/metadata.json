@@ -40,16 +40,6 @@
     "rhythm": null
   },
   {
-    "id": "color-run-698417",
-    "user": "shared",
-    "tags": ["color", "run", "sport"],
-    "numberFaces": 4,
-    "exif": null,
-    "originalMime": "image/jpeg",
-    "kernel": "normal",
-    "rhythm": null
-  },
-  {
     "id": "dolomites-4342531",
     "user": "Elsie",
     "tags": ["dolomites", "mountains", "nature"],
@@ -64,6 +54,16 @@
     "user": "Elsie",
     "tags": ["pear", "fruit"],
     "numberFaces": 0,
+    "exif": null,
+    "originalMime": "image/jpeg",
+    "kernel": "normal",
+    "rhythm": null
+  },
+  {
+    "id": "runners-1517163",
+    "user": "shared",
+    "tags": ["runners", "sport", "run"],
+    "numberFaces": 7,
     "exif": null,
     "originalMime": "image/jpeg",
     "kernel": "normal",
@@ -120,10 +120,10 @@
     "rhythm": null
   },
   {
-    "id": "runners-1517163",
+    "id": "color-run-698417",
     "user": "shared",
-    "tags": ["runners", "sport", "run"],
-    "numberFaces": 7,
+    "tags": ["color", "run", "sport"],
+    "numberFaces": 4,
     "exif": null,
     "originalMime": "image/jpeg",
     "kernel": "normal",
