@@ -1,23 +1,27 @@
-exports.colorChannels = {
+const colorChannels = {
   Red: 0,
   Green: 1,
   Blue: 2,
+  Y: 3,
+  Cb: 4,
+  Cr: 5,
 };
 
-exports.histogramRGB = function (channel, jimpImage) {
-  //   const colourFrequencies = getColourFrequencies(channel, jimpImage);
-  const colourFrequencies = getRGBtoYCbCrColourFrequencies(channel, jimpImage);
-
-  const histogram = createHistogram(
-    channel,
-    colourFrequencies.colourFrequencies,
-    colourFrequencies.maxFrequency
-  );
+const histogramRGB = (channel, jimpImage) => {
+  const colourFrequencies = getColourFrequencies(channel, jimpImage);
+  const histogram = createHistogram(channel, colourFrequencies);
 
   return histogram;
 };
 
-function getRGBtoYCbCrColourFrequencies(channel, jimpImage) {
+const histogramYCbCr = (channel, jimpImage) => {
+  const colourFrequencies = getYCbCrFrequencies(channel, jimpImage);
+  const histogram = createHistogram(channel, colourFrequencies);
+
+  return histogram;
+};
+
+function getYCbCrFrequencies(channel, jimpImage) {
   const startIndex = 0; // StartIndex same as RGB -> YCbCr enum: Y=0, Cb=1, Cr=2
 
   let maxFrequency = 0;
@@ -39,14 +43,14 @@ function getRGBtoYCbCrColourFrequencies(channel, jimpImage) {
     const Y = 0.299 * r + 0.587 * g + 0.114 * b;
     const Cb = b - Y;
     const Cr = r - Y;
-    const Yhex = Y.toString(16);
-    // const Yhex = Cb.toString(16);
-    // const Yhex = Cr.toString(16);
-    // const Yhex = Math.floor(Cb).toString(16);
-    // const Yhex = Y;
-    colourFrequencies[Yhex]++;
+    let hex;
 
-    if (colourFrequencies[Yhex] > maxFrequency) {
+    if (channel === 3) hex = Y.toString(16);
+    if (channel === 4) hex = Cb.toString(16);
+    if (channel === 5) hex = Cr.toString(16);
+    colourFrequencies[hex]++;
+
+    if (colourFrequencies[hex] > maxFrequency) {
       maxFrequency++;
     }
   }
@@ -86,10 +90,13 @@ function getColourFrequencies(channel, jimpImage) {
   return result;
 }
 
-function createHistogram(channel, colourFrequencies, maxFrequency) {
-  const histWidth = 512;
-  const histHeight = 316;
-  const columnWidth = 2;
+function createHistogram(channel, colourFrequenciesObj) {
+  const { colourFrequencies, maxFrequency } = colourFrequenciesObj;
+  const ch = channel;
+  const k = ch == 0 || ch == 1 || ch == 2 ? 0.5 : 0.35;
+  const histWidth = 512 * k;
+  const histHeight = 316 * k;
+  const columnWidth = 2 * k;
   const pixelsPerUnit = histHeight / maxFrequency;
 
   let hexColour;
@@ -97,8 +104,6 @@ function createHistogram(channel, colourFrequencies, maxFrequency) {
   let columnHeight;
 
   let svgstring = `<svg width='${histWidth}px' height='${histHeight}px' xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>\n`;
-
-  // svgstring += `    <rect fill='#ffffff;' width='${histWidth}px' height='${histHeight}px' y='0' x='0' />\n`;
 
   for (let i = 0; i <= 255; i++) {
     hexColour = i.toString(16).padStart(2, "0");
@@ -112,6 +117,17 @@ function createHistogram(channel, colourFrequencies, maxFrequency) {
         break;
       case exports.colorChannels.Blue:
         hexColour = "#0000" + hexColour;
+        break;
+      case exports.colorChannels.Y:
+        hexColour = "#000";
+        break;
+      case exports.colorChannels.Cb:
+        hexColour = "#00f";
+        break;
+      case exports.colorChannels.Cr:
+        hexColour = "#f00";
+        break;
+      default:
         break;
     }
     columnHeight = colourFrequencies[i] * pixelsPerUnit;
@@ -127,3 +143,7 @@ function createHistogram(channel, colourFrequencies, maxFrequency) {
 
   return svgstring;
 }
+
+exports.colorChannels = colorChannels;
+exports.histogramRGB = histogramRGB;
+exports.histogramYCbCr = histogramYCbCr;
