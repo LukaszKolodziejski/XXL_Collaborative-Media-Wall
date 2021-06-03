@@ -1,7 +1,7 @@
 [
   {
     "id": "bananas-1119790",
-    "user": "shared",
+    "user": "Łukasz",
     "tags": ["banana", "fruit"],
     "numberFaces": 0,
     "exif": null,
@@ -11,7 +11,7 @@
   },
   {
     "id": "baseball-1536097",
-    "user": "shared",
+    "user": "Łukasz",
     "tags": ["baseball", "sport"],
     "numberFaces": 2,
     "exif": null,
@@ -21,7 +21,7 @@
   },
   {
     "id": "blueberries-2278921",
-    "user": "shared",
+    "user": "Łukasz",
     "tags": ["blueberries", "fruit"],
     "numberFaces": 0,
     "exif": null,
@@ -31,7 +31,7 @@
   },
   {
     "id": "bridge-1540510",
-    "user": "shared",
+    "user": "Łukasz",
     "tags": ["bridge", "nature", "river"],
     "numberFaces": 0,
     "exif": null,
@@ -51,7 +51,7 @@
   },
   {
     "id": "dolomites-4342531",
-    "user": "shared",
+    "user": "Elsie",
     "tags": ["dolomites", "mountains", "nature"],
     "numberFaces": 0,
     "exif": null,
@@ -60,18 +60,8 @@
     "rhythm": null
   },
   {
-    "id": "bananas-1119790",
-    "user": "shared",
-    "tags": ["banana", "fruit"],
-    "numberFaces": 0,
-    "exif": null,
-    "originalMime": "image/jpeg",
-    "kernel": "normal",
-    "rhythm": null
-  },
-  {
     "id": "fruits-1534494",
-    "user": "shared",
+    "user": "Elsie",
     "tags": ["pear", "fruit"],
     "numberFaces": 0,
     "exif": null,
