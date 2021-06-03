@@ -23,22 +23,17 @@ const Carousel = (props) => {
       startLoop = props.active - 2;
       endLoop = props.active + 3;
     } else if (length > 2 && length < 5) {
-      console.log("2 5");
       startLoop = props.active - 1;
       endLoop = props.active + 2;
     } else if (length >= 0 && length <= 2) {
-      console.log("0 2");
       startLoop = props.active;
       endLoop = props.active + 1;
     }
 
     for (let i = startLoop; i < endLoop; i++) {
       let index = i;
-      if (i < 0) {
-        index = length + i;
-      } else if (i >= length) {
-        index = i % length;
-      }
+      index = i < 0 ? length + i : i >= length ? i % length : i;
+
       level = props.active - i;
       items.push(
         <CarouselItem
