@@ -70,8 +70,8 @@ app.get("/metadata", (req, res) => {
   res.send(metadata);
 });
 
-app.put("/metadata/:metadataId/:metadataNewUser", (req, res) => {
-  const { metadataId, metadataNewUser } = req.params;
+app.put("/metadata/:metadataId/:kind-:newMetadata", (req, res) => {
+  const { metadataId, newMetadata, kind } = req.params;
 
   const foundFile = metadata.find((it) => it.id == metadataId);
   if (!foundFile) {
@@ -81,16 +81,23 @@ app.put("/metadata/:metadataId/:metadataNewUser", (req, res) => {
   // const METADATA_PATH = path.join(__dirname, `../src/newMetadata.json`);
   const METADATA_PATH = path.join(__dirname, `../src/metadata.json`);
 
-  const newMetadata = metadata.map((data) => {
+  const newMetadataArray = metadata.map((data) => {
     if (data.id === metadataId) {
-      return {
-        ...data,
-        user: metadataNewUser,
-      };
+      if (kind === "user") {
+        return {
+          ...data,
+          user: newMetadata,
+        };
+      } else if (kind === "kernel") {
+        return {
+          ...data,
+          kernel: newMetadata,
+        };
+      }
     } else return data;
   });
 
-  const dataJson = JSON.stringify(newMetadata);
+  const dataJson = JSON.stringify(newMetadataArray);
   fs.writeFile(METADATA_PATH, dataJson, (err) => {
     if (err) {
       throw err;
