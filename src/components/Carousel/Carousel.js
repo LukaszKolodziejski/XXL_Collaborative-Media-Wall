@@ -39,6 +39,7 @@ const Carousel = (props) => {
         <CarouselItem
           key={index}
           level={level}
+          isAnimate={true}
           users={props.users}
           metadata={props.items[index]}
           modalClosed={modalHandler}
@@ -67,6 +68,7 @@ const Carousel = (props) => {
           showMetadata ? "Hide" : "Show"
         } Metadata`}</Button>
         <CarouselItem
+          isAnimate={false}
           level={9}
           metadata={activeID}
           users={props.users}
