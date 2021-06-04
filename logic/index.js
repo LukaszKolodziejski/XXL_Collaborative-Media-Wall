@@ -3,7 +3,8 @@ const exiftool = require("node-exiftool");
 const exiftoolBin = require("dist-exiftool");
 const fs = require("fs");
 const path = require("path");
-const metadata = require("./metadata.json");
+// const metadata = require("./metadata.json");
+const metadata = require("../src/metadata.json");
 // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 // To działa ;)
 var Jimp = require("jimp");
@@ -69,38 +70,68 @@ app.get("/metadata", (req, res) => {
   res.send(metadata);
 });
 
-app.put("/metadata/:metadataId/", (req, res) => {
-  const foundFile = findMetadataFile(req, res);
-  const { metadataId } = req.params;
-  //   const PHOTO_PATH = path.join(__dirname, `./images/${metadataId}.jpg`);
-  const PHOTO_PATH = path.join(
-    __dirname,
-    `../src/assets/images/${metadataId}.jpg`
-  );
-  const METADATA_PATH = path.join(__dirname, `./metadata.json`);
+app.put("/metadata/:metadataId/:metadataNewUser", (req, res) => {
+  const { metadataId, metadataNewUser } = req.params;
 
-  Jimp.read(PHOTO_PATH)
-    .then((img) => {
-      console.log("img");
-      //   console.log(img);
-      foundFile.exif = img._exif;
+  const foundFile = metadata.find((it) => it.id == metadataId);
+  if (!foundFile) {
+    throw res.status(404).send({ errorMessage: `Task does not exist` });
+  }
 
-      //   const data = [...metadata, foundFile];
-      //   const dataJson = JSON.stringify(data);
-      //   fs.writeFile(METADATA_PATH, dataJson, (err) => {
-      //     if (err) {
-      //       throw err;
-      //     }
-      //     console.log("JSON data is saved.");
-      //   });
-      res.send(foundFile);
-      return img;
-    })
-    .catch((err) => {
-      console.log("err img");
-      console.error(err);
-    });
+  // const METADATA_PATH = path.join(__dirname, `../src/newMetadata.json`);
+  const METADATA_PATH = path.join(__dirname, `../src/metadata.json`);
+
+  const newMetadata = metadata.map((data) => {
+    if (data.id === metadataId) {
+      return {
+        ...data,
+        user: metadataNewUser,
+      };
+    } else return data;
+  });
+
+  const dataJson = JSON.stringify(newMetadata);
+  fs.writeFile(METADATA_PATH, dataJson, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log("JSON data is saved.");
+  });
+  res.send(newMetadata);
 });
+
+// app.put("/metadata/:metadataId/", (req, res) => {
+//   const foundFile = findMetadataFile(req, res);
+//   const { metadataId } = req.params;
+//   //   const PHOTO_PATH = path.join(__dirname, `./images/${metadataId}.jpg`);
+//   const PHOTO_PATH = path.join(
+//     __dirname,
+//     `../src/assets/images/${metadataId}.jpg`
+//   );
+//   const METADATA_PATH = path.join(__dirname, `./metadata.json`);
+
+//   Jimp.read(PHOTO_PATH)
+//     .then((img) => {
+//       console.log("img");
+//       //   console.log(img);
+//       foundFile.exif = img._exif;
+
+//       //   const data = [...metadata, foundFile];
+//       //   const dataJson = JSON.stringify(data);
+//       //   fs.writeFile(METADATA_PATH, dataJson, (err) => {
+//       //     if (err) {
+//       //       throw err;
+//       //     }
+//       //     console.log("JSON data is saved.");
+//       //   });
+//       res.send(foundFile);
+//       return img;
+//     })
+//     .catch((err) => {
+//       console.log("err img");
+//       console.error(err);
+//     });
+// });
 
 function findMetadataFile(req, res) {
   const { metadataId } = req.params;
