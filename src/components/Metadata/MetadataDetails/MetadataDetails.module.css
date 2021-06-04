@@ -16,6 +16,10 @@
   background-color: #d6d6d6;
 }
 
+.List span:hover {
+  cursor: pointer;
+}
+
 .List .Kernel {
   background-color: rgba(50, 231, 22, 0.714);
 }

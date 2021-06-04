@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import SharedData from "./containers/SharedData/SharedData";
@@ -20,7 +20,12 @@ const images = importAllimages(
 );
 
 const App = () => {
+  // const [images, setImages] = useState(fetchImages);
   const users = ["shared", "Łukasz", "Elsie", "Willie", "Sheri"];
+
+  // useEffect(() => {
+  //   setImages(fetchImages);
+  // }, [imagesWithMetadata]);
 
   return (
     <Router>
