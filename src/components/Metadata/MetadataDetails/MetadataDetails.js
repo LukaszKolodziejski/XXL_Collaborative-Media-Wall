@@ -15,13 +15,12 @@ const MetadataDetails = (props) => {
 
   const clickHandler = (list, item) => {
     if (list === props.users) {
-      // const newMetadata = {
-      //   ...props.metadata,
-      //   user: item,
-      // };
-      // console.log(newMetadata);
-      axios.put(`/${id}/${item}`).then((res) => {
-        // console.log(res.data);
+      axios.put(`/${id}/user-${item}`).then((res) => {
+        console.log(res.data);
+      });
+    } else if (list === kernels) {
+      axios.put(`/${id}/kernel-${item}`).then((res) => {
+        console.log(res.data);
       });
     }
   };
