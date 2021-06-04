@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./MetadataDetails.module.css";
+import axios from "../../../axios-data";
 
 const MetadataDetails = (props) => {
   const { id, tags, originalMime, numberFaces, user, kernel } = props.metadata;
@@ -12,11 +13,28 @@ const MetadataDetails = (props) => {
     "sharpen",
   ];
 
+  const clickHandler = (list, item) => {
+    if (list === props.users) {
+      // const newMetadata = {
+      //   ...props.metadata,
+      //   user: item,
+      // };
+      // console.log(newMetadata);
+      axios.put(`/${id}/${item}`).then((res) => {
+        // console.log(res.data);
+      });
+    }
+  };
+
   const generateList = (list, classes, keyItem = "") => {
     return list.map((item) => {
       const style = item === keyItem || !keyItem ? classes : null;
       return (
-        <span key={item} className={style}>
+        <span
+          key={item}
+          className={style}
+          onClick={() => clickHandler(list, item)}
+        >
           {item}
         </span>
       );
