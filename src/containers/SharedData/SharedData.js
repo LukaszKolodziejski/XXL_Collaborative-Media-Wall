@@ -62,7 +62,11 @@ const SharedData = (props) => {
         onKeyEvent={moveHandler}
       />
       <div className={styles.SharedData}>
-        <Handtrack onGetPredictions={predictionsHandler} />
+        <Handtrack
+          model={props.model}
+          onGetPredictions={predictionsHandler}
+          onClearDetection={props.onClearDetection}
+        />
         <Carousel
           items={filteredImages}
           active={active}

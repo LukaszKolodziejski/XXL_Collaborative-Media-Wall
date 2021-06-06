@@ -9,8 +9,9 @@ const Handtrack = (props) => {
   const handimgRef = useRef(null);
 
   const [isVideo, setIsVideo] = useState(false);
-  const [model, setModel] = useState(null);
+  // const [model, setModel] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
+  const { model } = props;
 
   const modelParams = {
     flipHorizontal: true,
@@ -25,22 +26,30 @@ const Handtrack = (props) => {
     fontSize: 17,
   };
 
-  // Load the model.
-  useEffect(() => {
-    handTrack.load(modelParams).then((lmodel) => {
-      setModel(lmodel);
-      console.log(lmodel);
-      // runDetectionImage(lmodel, handimgRef.current);
-      // runDetectionImage(lmodel, webcamRef.current);
-    });
-  }, []);
+  // // Load the model.
+  // useEffect(() => {
+  //   handTrack.load(modelParams).then((lmodel) => {
+  //     setModel(lmodel);
+  //     console.log(lmodel);
+  //     // runDetectionImage(lmodel, handimgRef.current);
+  //     // runDetectionImage(lmodel, webcamRef.current);
+  //   });
+  // }, []);
 
   const runDetectionInterval = async (model) => runDetection(model);
 
-  const stopDetectionInterval = async () => {
+  const stopDetectionInterval = () => {
     setIntervalId(null);
     clearInterval(intervalId);
   };
+  const { onClearDetection } = props;
+  useEffect(() => {
+    const clear = async () => {
+      await onClearDetection(stopDetectionInterval);
+      await handTrack.stopVideo(webcamRef.current);
+    };
+    clear();
+  }, [onClearDetection]);
 
   const toggleVideo = async () => {
     if (!isVideo) {
@@ -69,17 +78,21 @@ const Handtrack = (props) => {
   };
 
   const runDetection = async (modelImg) => {
-    modelImg.detect(webcamRef.current).then((predictions) => {
-      props.onGetPredictions(predictions);
-      const context = canvasRef.current.getContext("2d");
-      modelImg.renderPredictions(
-        predictions,
-        canvasRef.current,
-        context,
-        webcamRef.current
-      );
-      if (isVideo) requestAnimationFrame(runDetection);
-    });
+    if (webcamRef.current) {
+      modelImg.detect(webcamRef.current).then((predictions) => {
+        props.onGetPredictions(predictions);
+        if (canvasRef.current) {
+          const context = canvasRef.current.getContext("2d");
+          modelImg.renderPredictions(
+            predictions,
+            canvasRef.current,
+            context,
+            webcamRef.current
+          );
+          if (isVideo) requestAnimationFrame(runDetection);
+        }
+      });
+    }
   };
 
   const runDetectionImage = async (modelImg, img) => {

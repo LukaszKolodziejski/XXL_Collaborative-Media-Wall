@@ -6,6 +6,7 @@ import Logout from "./containers/Logout/Logout";
 // import Auth from "./containers/Auth/Auth";
 // import Logout from "./containers/Auth/Logout/Logout";
 import imagesWithMetadata from "./metadata.json";
+import * as handTrack from "handtrackjs";
 
 const App = () => {
   const importAllimages = (r) =>
@@ -23,6 +24,30 @@ const App = () => {
 
   const [images, setImages] = useState(fetchImages);
   const users = ["shared", "Łukasz", "Elsie", "Willie", "Sheri"];
+  const [model, setModel] = useState(null);
+
+  const modelParams = {
+    flipHorizontal: true,
+    outputStride: 16,
+    imageScaleFactor: 1,
+    maxNumBoxes: 20,
+    iouThreshold: 0.2,
+    scoreThreshold: 0.6,
+    modelType: "ssd320fpnlite",
+    modelSize: "large",
+    bboxLineWidth: "2",
+    fontSize: 17,
+  };
+  // Load the model.
+  useEffect(() => {
+    handTrack.load(modelParams).then((lmodel) => {
+      setModel(lmodel);
+      console.log(lmodel);
+      // runDetectionImage(lmodel, handimgRef.current);
+      // runDetectionImage(lmodel, webcamRef.current);
+    });
+  }, []);
+  const clearDetection = (onClear) => onClear();
 
   useEffect(() => {
     setImages(fetchImages);
@@ -38,7 +63,13 @@ const App = () => {
             key={user}
             path={`/folder-${user}`}
             component={() => (
-              <SharedData images={images} user={user} users={users} />
+              <SharedData
+                images={images}
+                user={user}
+                users={users}
+                model={model}
+                onClearDetection={clearDetection}
+              />
             )}
           />
         ))}
