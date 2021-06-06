@@ -1,3 +1,10 @@
+.Container {
+  position: fixed;
+  z-index: 3000;
+  top: 57px;
+  left: 0;
+}
+
 .Handtrack {
   display: none;
 }
@@ -30,7 +37,7 @@
 .Btn {
   width: 320px;
   border-radius: 0 5px 5px 0;
-  padding: 3px 0 3px 120px;
+  padding: 3px 0 3px 20px;
   cursor: pointer;
   -webkit-transition: 0.4s;
   transition: 0.4s;

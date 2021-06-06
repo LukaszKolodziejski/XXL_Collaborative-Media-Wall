@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as handTrack from "handtrackjs";
-import Image from "./imageFaceHand.jpg";
+// import Image from "./imageFaceHand.jpg";
 import styles from "./styles/Handtrack.module.css";
 
-const Logout = (props) => {
+const Handtrack = (props) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const handimgRef = useRef(null);
@@ -28,10 +28,8 @@ const Logout = (props) => {
   // Load the model.
   useEffect(() => {
     handTrack.load(modelParams).then((lmodel) => {
-      // detect objects in the image.
       setModel(lmodel);
       console.log(lmodel);
-
       // runDetectionImage(lmodel, handimgRef.current);
       // runDetectionImage(lmodel, webcamRef.current);
     });
@@ -64,7 +62,7 @@ const Logout = (props) => {
         console.log("model");
         const detection = setInterval(() => {
           runDetectionInterval(model);
-        }, 70);
+        }, 250);
         setIntervalId(detection);
       }
     });
@@ -72,7 +70,7 @@ const Logout = (props) => {
 
   const runDetection = async (modelImg) => {
     modelImg.detect(webcamRef.current).then((predictions) => {
-      console.log("Predictions: ", predictions);
+      props.onGetPredictions(predictions);
       const context = canvasRef.current.getContext("2d");
       modelImg.renderPredictions(
         predictions,
@@ -94,26 +92,19 @@ const Logout = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.Container}>
       <div onClick={toggleVideo} className={styles.Btn}>
         {isVideo ? "Close camera" : "Open camera"}
       </div>
-      <div className="container">
-        <div className={isVideo ? null : styles.Handtrack}>
-          <video ref={webcamRef} className={styles.Video}></video>
-          <canvas ref={canvasRef} className={styles.Canvas} />
-        </div>
-        <div>
-          <img
-            alt="Img"
-            ref={handimgRef}
-            src={Image}
-            className={styles.Image}
-          />
-        </div>
+      <div className={isVideo ? null : styles.Handtrack}>
+        <video ref={webcamRef} className={styles.Video}></video>
+        <canvas ref={canvasRef} className={styles.Canvas} />
       </div>
+      {/* <div>
+        <img alt="Img" ref={handimgRef} src={Image} className={styles.Image} />
+      </div> */}
     </div>
   );
 };
 
-export default Logout;
+export default Handtrack;

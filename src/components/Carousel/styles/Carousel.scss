@@ -1,11 +1,17 @@
 @import "./variable";
 
 #carousel {
+  position: fixed;
+  top: 0;
+  /* z-index: 1; */
+
   display: block;
-  position: relative;
+  // position: relative;
   height: 100%;
   width: 100vw;
-  padding: 120px 0 0 0;
+  // padding: 120px 0 0 0;
+  // margin: 120px 0 0 0;
+  margin: 220px 0 0 0;
   text-align: center;
   align-items: center;
   align-content: center;
