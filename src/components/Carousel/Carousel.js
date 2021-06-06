@@ -7,9 +7,15 @@ import Metadata from "../Metadata/Metadata";
 import Button from "../UI/Button/Button";
 
 const Carousel = (props) => {
-  const [isModal, setIsModal] = useState(false);
-  const [activeID, setActiveID] = useState({});
-  const [showMetadata, setShowMetadata] = useState(false);
+  const {
+    isModal,
+    activeID,
+    showMetadata,
+    modalHandler,
+    activeIdHandler,
+    btnHandler,
+    predictions,
+  } = props;
 
   const generateItems = () => {
     const items = [];
@@ -39,25 +45,20 @@ const Carousel = (props) => {
         <CarouselItem
           key={index}
           level={level}
+          items={props.items}
           isAnimate={true}
           users={props.users}
+          index={index}
           metadata={props.items[index]}
           modalClosed={modalHandler}
           activeMmetadata={activeIdHandler}
+          predictions={predictions}
+          btnHandler={btnHandler}
         />
       );
     }
     return items;
   };
-
-  const modalHandler = () => {
-    setIsModal((prev) => !prev);
-    setActiveID({});
-    setShowMetadata(false);
-  };
-  const activeIdHandler = (id) =>
-    setActiveID(props.items.find((item) => item.id === id));
-  const btnHandler = () => setShowMetadata((prev) => !prev);
 
   if (props.items.length === 0) return <div>{"No data :("}</div>;
 
@@ -72,8 +73,10 @@ const Carousel = (props) => {
           level={9}
           metadata={activeID}
           users={props.users}
+          show={showMetadata}
           activeMmetadata={activeIdHandler}
           modalClosed={modalHandler}
+          btnHandler={btnHandler}
         >
           <Metadata
             show={showMetadata}
