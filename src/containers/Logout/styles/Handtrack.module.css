@@ -1,0 +1,38 @@
+.Video {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 9;
+  width: 640;
+  height: 480;
+  display: none;
+}
+
+.Canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  width: 640;
+  height: 480;
+}
+
+.Image {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 10;
+  width: 640;
+  height: 480;
+  display: none;
+}
+/*# sourceMappingURL=Handtrack.module.css.map */
