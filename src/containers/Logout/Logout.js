@@ -8,7 +8,6 @@ const Logout = (props) => {
   const canvasRef = useRef(null);
   const handimgRef = useRef(null);
 
-  let imgindex = 1;
   const [isVideo, setIsVideo] = useState(false);
   const [model, setModel] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
@@ -32,13 +31,9 @@ const Logout = (props) => {
       // detect objects in the image.
       setModel(lmodel);
       console.log(lmodel);
-      // updateNote.innerText = "Loaded Model!";
 
-      // runDetectionImage(lmodel, handimgRef.current); //<<<<<<<<
-      // runDetectionImage(lmodel, webcamRef.current); //<<<<<<<<<
-
-      // trackButton.disabled = false;
-      // nextImageButton.disabled = false;
+      // runDetectionImage(lmodel, handimgRef.current);
+      // runDetectionImage(lmodel, webcamRef.current);
     });
   }, []);
 
@@ -51,25 +46,19 @@ const Logout = (props) => {
 
   const toggleVideo = async () => {
     if (!isVideo) {
-      // updateNote.innerText = "Starting video";
       startVideo();
       setIsVideo(true);
     } else {
-      // updateNote.innerText = "Stopping video";
       handTrack.stopVideo(webcamRef.current);
       setIsVideo(false);
       stopDetectionInterval();
-      // setModel(null);
-      // updateNote.innerText = "Video stopped";
     }
   };
 
   const startVideo = async () => {
-    // const startVideo = () => {
     handTrack.startVideo(webcamRef.current).then((status) => {
       console.log("video started", status);
       if (status) {
-        // updateNote.innerText = "Video started. Now tracking";
         setIsVideo(true);
         console.log(model);
         console.log("model");
@@ -77,28 +66,9 @@ const Logout = (props) => {
           runDetectionInterval(model);
         }, 70);
         setIntervalId(detection);
-      } else {
-        // updateNote.innerText = "Please enable video";
       }
     });
   };
-
-  // nextImageButton.addEventListener("click", function () {
-  //   nextImage();
-  // });
-
-  // trackButton.addEventListener("click", function () {
-  //   toggleVideo();
-  // });
-
-  // function nextImage() {
-  //   imgindex++;
-  //   handimg.src = "../images/" + (imgindex % 9) + ".jpg";
-  //   // alert(handimg.src)
-  //   setTimeout(() => {
-  //     runDetectionImage(handimg);
-  //   }, 500);
-  // }
 
   const runDetection = async (modelImg) => {
     modelImg.detect(webcamRef.current).then((predictions) => {
@@ -125,9 +95,11 @@ const Logout = (props) => {
 
   return (
     <div>
-      <button onClick={toggleVideo}>Camera</button>
+      <div onClick={toggleVideo} className={styles.Btn}>
+        {isVideo ? "Close camera" : "Open camera"}
+      </div>
       <div className="container">
-        <div id="handtrackjs">
+        <div className={isVideo ? null : styles.Handtrack}>
           <video ref={webcamRef} className={styles.Video}></video>
           <canvas ref={canvasRef} className={styles.Canvas} />
         </div>
