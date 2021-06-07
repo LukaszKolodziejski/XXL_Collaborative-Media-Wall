@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { CSSTransitionGroup } from "react-transition-group/";
 import CarouselItem from "./CarouselItem/CarouselItem";
 import "./styles/Carousel.css";
