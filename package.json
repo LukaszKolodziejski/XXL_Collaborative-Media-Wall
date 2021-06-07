@@ -51,8 +51,8 @@
     "eject": "react-scripts eject",
     "api": "node api/index.js",
     "dev": "nodemon api/index.js",
-    "devhist": "node api/imagehistogramsdemo.js",
-    "hist": "nodemon api/imagehistogramsdemo.js"
+    "devhist": "node api/createimagehistograms.js",
+    "hist": "nodemon api/createimagehistograms.js"
   },
   "eslintConfig": {
     "extends": [
