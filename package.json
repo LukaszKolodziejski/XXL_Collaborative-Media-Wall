@@ -49,10 +49,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "node logic/index.js",
-    "dev": "nodemon logic/index.js",
-    "devhist": "node logic/imagehistogramsdemo.js",
-    "hist": "nodemon logic/imagehistogramsdemo.js"
+    "api": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "devhist": "node api/createimagehistograms.js",
+    "hist": "nodemon api/createimagehistograms.js"
   },
   "eslintConfig": {
     "extends": [

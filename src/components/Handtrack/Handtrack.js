@@ -1,40 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
 import * as handTrack from "handtrackjs";
-// import Image from "./imageFaceHand.jpg";
 import styles from "./styles/Handtrack.module.css";
 
 const Handtrack = (props) => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
-  const handimgRef = useRef(null);
 
   const [isVideo, setIsVideo] = useState(false);
-  // const [model, setModel] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
-  const { model } = props;
-
-  const modelParams = {
-    flipHorizontal: true,
-    outputStride: 16,
-    imageScaleFactor: 1,
-    maxNumBoxes: 20,
-    iouThreshold: 0.2,
-    scoreThreshold: 0.6,
-    modelType: "ssd320fpnlite",
-    modelSize: "large",
-    bboxLineWidth: "2",
-    fontSize: 17,
-  };
-
-  // // Load the model.
-  // useEffect(() => {
-  //   handTrack.load(modelParams).then((lmodel) => {
-  //     setModel(lmodel);
-  //     console.log(lmodel);
-  //     // runDetectionImage(lmodel, handimgRef.current);
-  //     // runDetectionImage(lmodel, webcamRef.current);
-  //   });
-  // }, []);
+  const { model, onClearDetection } = props;
 
   const runDetectionInterval = async (model) => runDetection(model);
 
@@ -42,7 +16,7 @@ const Handtrack = (props) => {
     setIntervalId(null);
     clearInterval(intervalId);
   };
-  const { onClearDetection } = props;
+
   useEffect(() => {
     const clear = async () => {
       await onClearDetection(stopDetectionInterval);
@@ -64,11 +38,8 @@ const Handtrack = (props) => {
 
   const startVideo = async () => {
     handTrack.startVideo(webcamRef.current).then((status) => {
-      console.log("video started", status);
       if (status) {
         setIsVideo(true);
-        console.log(model);
-        console.log("model");
         const detection = setInterval(() => {
           runDetectionInterval(model);
         }, 250);
@@ -113,9 +84,6 @@ const Handtrack = (props) => {
         <video ref={webcamRef} className={styles.Video}></video>
         <canvas ref={canvasRef} className={styles.Canvas} />
       </div>
-      {/* <div>
-        <img alt="Img" ref={handimgRef} src={Image} className={styles.Image} />
-      </div> */}
     </div>
   );
 };
