@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import styles from "./SharedData.module.css";
-import axios from "../../axios-data";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import Handtrack from "../../components/Handtrack/Handtrack";
 
