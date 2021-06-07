@@ -37,6 +37,7 @@
     "react-webcam": "^5.2.4",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
+    "video-react": "^0.14.1",
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
