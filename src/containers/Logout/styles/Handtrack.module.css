@@ -7,11 +7,17 @@
 }
 
 .Canvas {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 130px;
+  left: 0;
+  right: 0;
   text-align: center;
   z-index: 10;
-  width: 320px;
-  height: 240px;
-  border-radius: 0 10px 10px 0;
+  width: 704px;
+  height: 528px;
+  border-radius: 10px;
 }
 
 .Image {
@@ -28,13 +34,23 @@
 }
 
 .Btn {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  left: 0;
+  right: 0;
   width: 320px;
-  border-radius: 0 5px 5px 0;
-  padding: 3px 0 3px 120px;
+  border: 2px solid #604a33;
+  z-index: 11;
+  border-radius: 15px;
+  padding: 15px 25px;
+  text-align: center;
   cursor: pointer;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   font-weight: bold;
+  font-size: 20px;
   background-color: #afadad;
 }
 
@@ -42,6 +58,10 @@
   background-color: #bab5b5;
   -webkit-box-shadow: 2px 2px 20px -1px rgba(0, 0, 0, 0.632);
           box-shadow: 2px 2px 20px -1px rgba(0, 0, 0, 0.632);
+}
+
+.Hide {
+  display: none;
 }
 
 .Player {
@@ -53,5 +73,53 @@
   background-color: #d82323;
   background-size: cover;
   z-index: 100;
+}
+
+.ProgressAuth {
+  z-index: 1;
+  color: black;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  left: 0;
+  right: 0;
+  width: 620px;
+  border: 2px solid #604a33;
+  z-index: 11;
+  border-radius: 15px;
+  padding: 15px 25px;
+  text-align: center;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: #cec7c7;
+}
+
+.ProgressText {
+  z-index: 1;
+  color: black;
+}
+
+.Progress {
+  height: 30px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+.Bar {
+  margin-top: 10px;
+  height: 30px;
+  background-image: -webkit-gradient(linear, left top, right top, from(#0ab3fd), to(#0082fa));
+  background-image: linear-gradient(to right, #0ab3fd, #0082fa);
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-radius: 20px;
+  z-index: 2;
+  font-weight: normal;
 }
 /*# sourceMappingURL=Handtrack.module.css.map */

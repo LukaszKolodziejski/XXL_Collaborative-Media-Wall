@@ -1,4 +1,4 @@
-$m: 0.5;
+$m: 1.1;
 .Handtrack {
   display: none;
 }
@@ -17,16 +17,17 @@ $m: 0.5;
 }
 
 .Canvas {
-  // position: absolute;
-  // margin-left: auto;
-  // margin-right: auto;
-  // left: 0;
-  // right: 0;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 130px;
+  left: 0;
+  right: 0;
   text-align: center;
   z-index: 10;
   width: 640px * $m;
   height: 480px * $m;
-  border-radius: 0 10px 10px 0;
+  border-radius: 10px;
 }
 
 .Image {
@@ -43,17 +44,31 @@ $m: 0.5;
 }
 
 .Btn {
-  width: 640px * $m;
-  border-radius: 0 5px 5px 0;
-  padding: 3px 0 3px 120px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 200px;
+  left: 0;
+  right: 0;
+  width: 320px;
+  border: 2px solid rgb(96, 74, 51);
+  z-index: 11;
+  border-radius: 15px;
+  padding: 15px 25px;
+  text-align: center;
   cursor: pointer;
   transition: 0.4s;
   font-weight: bold;
+  font-size: 20px;
+  // transition: 0.2s;
   background-color: rgb(175, 173, 173);
   &:hover {
     background-color: rgb(186, 181, 181);
     box-shadow: 2px 2px 20px -1px rgba(0, 0, 0, 0.632);
   }
+}
+.Hide {
+  display: none;
 }
 
 .Player {
@@ -67,4 +82,52 @@ $m: 0.5;
   background-size: cover;
   z-index: 100;
   // overflow: auto;
+}
+
+.ProgressAuth {
+  z-index: 1;
+  color: black;
+
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  left: 0;
+  right: 0;
+  width: 620px;
+  border: 2px solid rgb(96, 74, 51);
+  z-index: 11;
+  border-radius: 15px;
+  padding: 15px 25px;
+  text-align: center;
+  // cursor: pointer;
+  transition: 0.4s;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgb(206, 199, 199);
+}
+
+.ProgressText {
+  z-index: 1;
+  color: black;
+}
+
+.Progress {
+  height: 30px;
+  width: 100%;
+  background-color: #ddd;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+.Bar {
+  margin-top: 10px;
+  height: 30px;
+  background-image: linear-gradient(to right, #0ab3fd, #0082fa);
+  text-align: center;
+  line-height: 30px;
+  color: white;
+  border-radius: 20px;
+  z-index: 2;
+  font-weight: normal;
 }
