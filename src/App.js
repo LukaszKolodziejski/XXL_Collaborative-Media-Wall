@@ -3,16 +3,14 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import SharedData from "./containers/SharedData/SharedData";
 import Logout from "./containers/Logout/Logout";
-import imagesWithMetadata from "./metadata.json";
+import data from "./metadata.json";
 import * as handTrack from "handtrackjs";
 
 const App = () => {
   const importAllFiles = (r) =>
     r.keys().map((item) => {
       const imageUrl = r(item).default;
-      const image = imagesWithMetadata.find((imgMeta) =>
-        imageUrl.includes(imgMeta.id)
-      );
+      const image = data.find((imgMeta) => imageUrl.includes(imgMeta.id));
       return { ...image, imageUrl };
     });
 
@@ -38,17 +36,14 @@ const App = () => {
   };
 
   useEffect(() => {
-    handTrack.load(modelParams).then((lmodel) => {
-      setModel(lmodel);
-      // runDetectionImage(lmodel, handimgRef.current);
-    });
+    handTrack.load(modelParams).then((lmodel) => setModel(lmodel));
   }, []);
 
   const clearDetection = (onClear) => onClear();
 
   useEffect(() => {
     setImages(fetchFiles);
-  }, [imagesWithMetadata]);
+  }, [data]);
 
   return (
     <Router>
