@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import * as handTrack from "handtrackjs";
 import Image from "./imageFaceHand.jpg";
 import styles from "./styles/Handtrack.module.css";
+import { Redirect } from "react-router-dom";
 
 const Logout = (props) => {
   const webcamRef = useRef(null);
@@ -11,6 +12,7 @@ const Logout = (props) => {
   const [isVideo, setIsVideo] = useState(false);
   const [model, setModel] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   const modelParams = {
     flipHorizontal: true,
@@ -24,16 +26,21 @@ const Logout = (props) => {
     bboxLineWidth: "2",
     fontSize: 17,
   };
+  const wrapperBar = useRef(null);
 
-  // Load the model.
+  useEffect(() => {
+    if (wrapperBar.current) wrapperBar.current.style.width = `${2 * progress}%`;
+    const clear = async () => {
+      await stopDetectionInterval();
+      await handTrack.stopVideo(webcamRef.current);
+    };
+    if (progress === 50) clear();
+  }, [progress]);
+
   useEffect(() => {
     handTrack.load(modelParams).then((lmodel) => {
-      // detect objects in the image.
       setModel(lmodel);
-      console.log(lmodel);
-
       // runDetectionImage(lmodel, handimgRef.current);
-      // runDetectionImage(lmodel, webcamRef.current);
     });
   }, []);
 
@@ -64,40 +71,62 @@ const Logout = (props) => {
         console.log("model");
         const detection = setInterval(() => {
           runDetectionInterval(model);
-        }, 70);
+        }, 50);
         setIntervalId(detection);
       }
     });
   };
 
+  const authenticate = (predictions) => {
+    const pred = predictions.filter((pred) => pred.label === "face");
+    if (pred.length === 1) setProgress((prev) => (prev < 50 ? prev + 1 : prev));
+  };
+
   const runDetection = async (modelImg) => {
-    modelImg.detect(webcamRef.current).then((predictions) => {
-      console.log("Predictions: ", predictions);
-      const context = canvasRef.current.getContext("2d");
-      modelImg.renderPredictions(
-        predictions,
-        canvasRef.current,
-        context,
-        webcamRef.current
-      );
-      if (isVideo) requestAnimationFrame(runDetection);
-    });
+    if (webcamRef.current) {
+      modelImg.detect(webcamRef.current).then(async (predictions) => {
+        await authenticate(predictions);
+        if (canvasRef.current && progress < 50) {
+          const context = canvasRef.current.getContext("2d");
+          modelImg.renderPredictions(
+            predictions,
+            canvasRef.current,
+            context,
+            webcamRef.current
+          );
+        }
+        if (isVideo) requestAnimationFrame(runDetection);
+      });
+    }
   };
 
   const runDetectionImage = async (modelImg, img) => {
     console.log(img);
     modelImg.detect(img).then((predictions) => {
-      console.log("Predictions: ", predictions);
       const context = canvasRef.current.getContext("2d");
       modelImg.renderPredictions(predictions, canvasRef.current, context, img);
     });
   };
 
+  const ProgressAuth = (
+    <div className={styles.ProgressAuth}>
+      <div className={styles.ProgressText}>Progress of Authenticate</div>
+      <div className={styles.Progress}>
+        <div ref={wrapperBar} className={styles.Bar}>
+          {2 * progress}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (progress === 50) return <Redirect to="/folder-shared" />;
+
   return (
     <div>
-      <div onClick={toggleVideo} className={styles.Btn}>
-        {isVideo ? "Close camera" : "Open camera"}
+      <div onClick={toggleVideo} className={isVideo ? styles.Hide : styles.Btn}>
+        {isVideo ? "Close camera" : "Open camera to authenticate"}
       </div>
+      {ProgressAuth}
       <div className="container">
         <div className={isVideo ? null : styles.Handtrack}>
           <video ref={webcamRef} className={styles.Video}></video>
