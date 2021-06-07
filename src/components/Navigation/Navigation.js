@@ -20,7 +20,6 @@ const Navigation = (props) => {
             );
           })}
         </ul>
-        {/* <NavigationItems isAuth={props.isAuth} /> */}
       </nav>
       <div className={styles.Logout}>
         <NavLink to="/" exact>
