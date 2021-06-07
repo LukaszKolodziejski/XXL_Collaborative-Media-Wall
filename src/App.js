@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import Layout from "./hoc/Layout/Layout";
 import SharedData from "./containers/SharedData/SharedData";
 import Logout from "./containers/Logout/Logout";
-// import Auth from "./containers/Auth/Auth";
-// import Logout from "./containers/Auth/Logout/Logout";
 import imagesWithMetadata from "./metadata.json";
 import * as handTrack from "handtrackjs";
 
 const App = () => {
-  const importAllimages = (r) =>
+  const importAllFiles = (r) =>
     r.keys().map((item) => {
       const imageUrl = r(item).default;
       const image = imagesWithMetadata.find((imgMeta) =>
@@ -18,13 +16,13 @@ const App = () => {
       return { ...image, imageUrl };
     });
 
-  const fetchImages = importAllimages(
-    require.context("./assets/images", false, /\.(png|jpg|svg)$/)
+  const fetchFiles = importAllFiles(
+    require.context("./assets/images", false, /\.(png|jpg|svg|mp4)$/)
   );
 
-  const [images, setImages] = useState(fetchImages);
-  const users = ["shared", "Łukasz", "Elsie", "Willie", "Sheri"];
+  const [images, setImages] = useState(fetchFiles);
   const [model, setModel] = useState(null);
+  const users = ["shared", "Łukasz", "Elsie", "Willie", "Sheri"];
 
   const modelParams = {
     flipHorizontal: true,
@@ -38,20 +36,18 @@ const App = () => {
     bboxLineWidth: "2",
     fontSize: 17,
   };
-  // Load the model.
+
   useEffect(() => {
     handTrack.load(modelParams).then((lmodel) => {
       setModel(lmodel);
-      console.log(lmodel);
       // runDetectionImage(lmodel, handimgRef.current);
-      // runDetectionImage(lmodel, webcamRef.current);
     });
   }, []);
+
   const clearDetection = (onClear) => onClear();
 
   useEffect(() => {
-    setImages(fetchImages);
-    // setImages(images);
+    setImages(fetchFiles);
   }, [imagesWithMetadata]);
 
   return (

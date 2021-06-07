@@ -9,12 +9,13 @@ const calcY = (x, lx) => (x - lx - window.innerWidth / 2) / 20;
 const CarouselItem = (props) => {
   const [drag, setDrag] = useState(false);
   const wrapper = useRef(null);
-  const { show, predictions, btnHandler, index } = props;
+  const { show, predictions, btnHandler, index, metadata } = props;
   const [activePoint, setActivePoint] = useState(0);
+  const [isOpenVideo, setIsOpenVideo] = useState(false);
 
   const doubleClickHandler = () => {
     props.modalClosed();
-    props.activeMmetadata(props.metadata.id);
+    props.activeMmetadata(metadata.id);
   };
 
   const doublePoindHandler = () => {
@@ -30,6 +31,7 @@ const CarouselItem = (props) => {
 
     props.modalClosed();
     props.activeMmetadata(props.items[i].id);
+    setIsOpenVideo((prev) => !prev);
   };
 
   useEffect(() => {
@@ -104,10 +106,16 @@ const CarouselItem = (props) => {
         rotateZ,
       }}
     >
-      <div
-        className="image"
-        style={{ backgroundImage: `url(${props.metadata.imageUrl})` }}
-      />
+      {metadata.originalMime === "image/jpeg" ? (
+        <div
+          className="image"
+          style={{ backgroundImage: `url(${metadata.imageUrl})` }}
+        />
+      ) : metadata.originalMime === "video/mp4" ? (
+        <video id="video" className="image" controls>
+          <source src={metadata.imageUrl} type="video/mp4" />
+        </video>
+      ) : null}
       {props.children}
     </animated.div>
   );

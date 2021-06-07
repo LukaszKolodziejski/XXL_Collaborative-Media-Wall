@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { CSSTransitionGroup } from "react-transition-group/";
 import CarouselItem from "./CarouselItem/CarouselItem";
 import "./styles/Carousel.css";
@@ -16,6 +16,26 @@ const Carousel = (props) => {
     btnHandler,
     predictions,
   } = props;
+  const wrapperVid = useRef(null);
+
+  useEffect(() => {
+    if (isModal && activeID.originalMime === "video/mp4") {
+      const video = wrapperVid.current.querySelector("* > #video");
+      if (predictions) {
+        const pred = predictions
+          .filter((pred) => pred.label !== "face")
+          .sort((a, b) => (a.bbox[0] > b.bbox[0] && 1) || -1);
+        if (pred.length === 2) {
+          const leftHand = pred[0].label;
+          const rightHand = pred[1].label;
+          if (leftHand === "open" && rightHand === "open") video.play();
+          else if (leftHand === "closed" && rightHand === "closed")
+            video.pause();
+          else if (leftHand === "closed" && rightHand === "open") video.load();
+        }
+      }
+    }
+  }, [isModal, predictions]);
 
   const generateItems = () => {
     const items = [];
@@ -63,7 +83,7 @@ const Carousel = (props) => {
   if (props.items.length === 0) return <div>{"No data :("}</div>;
 
   return (
-    <>
+    <div ref={wrapperVid}>
       <Modal show={isModal} modalClosed={modalHandler}>
         <Button clicked={btnHandler}>{`${
           showMetadata ? "Hide" : "Show"
@@ -106,7 +126,7 @@ const Carousel = (props) => {
           <i className="fi-arrow-right">{">"}</i>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
